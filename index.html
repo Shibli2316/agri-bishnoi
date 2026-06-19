@@ -224,27 +224,40 @@ section{padding:7rem 6%;max-width:1160px;margin:0 auto}
   line-height: 1.4;
 }
 
-/* Book Spread Container */
-.book-container {
+/* Book Spread Container & Wrap */
+.book-container-wrap {
   display: flex;
-  position: relative;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
   width: 0;
   opacity: 0;
   pointer-events: none;
   overflow: hidden;
-  height: 0;
-  transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, height 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+}
+#expertise.active-book-mode .book-container-wrap {
+  width: calc(100% - 280px);
+  opacity: 1;
+  pointer-events: auto;
+}
+.book-container {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 480px;
   background: #ffffff;
   border-radius: 16px;
   box-shadow: 0 30px 70px rgba(45, 106, 79, 0.08), 0 0 0 1px rgba(0,0,0,0.02);
   border: 1px solid rgba(45, 106, 79, 0.1);
   z-index: 10;
+  overflow: hidden;
 }
 
 /* Active Book layout */
 #expertise.active-book-mode .exp-g-col {
   grid-template-columns: 1fr;
-  width: 320px;
+  width: 260px;
   flex-shrink: 0;
 }
 #expertise.active-book-mode .exp-card {
@@ -257,12 +270,6 @@ section{padding:7rem 6%;max-width:1160px;margin:0 auto}
 #expertise.active-book-mode .exp-card .exp-h {
   font-size: 0.95rem;
 }
-#expertise.active-book-mode .book-container {
-  width: calc(100% - 340px);
-  opacity: 1;
-  pointer-events: auto;
-  height: 480px;
-}
 
 .book-pages {
   display: flex;
@@ -273,7 +280,7 @@ section{padding:7rem 6%;max-width:1160px;margin:0 auto}
 .book-page {
   width: 50%;
   height: 100%;
-  padding: 3rem 2.5rem;
+  padding: 2.2rem 2rem;
   overflow-y: auto;
   position: relative;
 }
@@ -285,12 +292,12 @@ section{padding:7rem 6%;max-width:1160px;margin:0 auto}
   justify-content: flex-start;
 }
 .book-page.right-page {
-  background: #fafaf7;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 0;
+  padding: 1.5rem;
 }
 .book-img-wrap {
   width: 100%;
@@ -303,7 +310,7 @@ section{padding:7rem 6%;max-width:1160px;margin:0 auto}
 .book-img-wrap img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 .book-text {
@@ -315,22 +322,22 @@ section{padding:7rem 6%;max-width:1160px;margin:0 auto}
 }
 .book-page-num {
   font-family: 'Playfair Display', serif;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   color: var(--clay);
   font-weight: 700;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.4rem;
 }
 .book-page-title {
   font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
+  font-size: 1.45rem;
   color: var(--text);
-  margin-bottom: 1.2rem;
-  line-height: 1.3;
+  margin-bottom: 1rem;
+  line-height: 1.25;
 }
 .book-page-desc {
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   color: var(--text2);
-  line-height: 1.75;
+  line-height: 1.65;
 }
 .book-spine {
   position: absolute;
@@ -344,19 +351,13 @@ section{padding:7rem 6%;max-width:1160px;margin:0 auto}
   z-index: 2;
 }
 
-.book-controls {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 2.5rem;
-  right: 2.5rem;
+.book-controls-outer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  z-index: 5;
-}
-.book-nav-btns {
-  display: flex;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+  animation: fadeIn 0.4s ease;
 }
 .book-btn {
   background: var(--bg2);
@@ -364,7 +365,7 @@ section{padding:7rem 6%;max-width:1160px;margin:0 auto}
   color: var(--text);
   font-size: 0.8rem;
   font-weight: 600;
-  padding: 0.45rem 1rem;
+  padding: 0.45rem 1.2rem;
   border-radius: 30px;
   cursor: pointer;
   transition: all 0.25s;
@@ -380,20 +381,29 @@ section{padding:7rem 6%;max-width:1160px;margin:0 auto}
   font-weight: 600;
 }
 .book-close-btn {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
   background: rgba(200, 101, 75, 0.1);
   border: 1px solid rgba(200, 101, 75, 0.2);
   color: var(--clay);
   font-size: 0.8rem;
-  font-weight: 600;
-  padding: 0.45rem 1rem;
-  border-radius: 30px;
+  font-weight: 700;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   transition: all 0.25s;
+  z-index: 15;
 }
 .book-close-btn:hover {
   background: var(--clay);
   color: #fff;
   border-color: var(--clay);
+  transform: rotate(90deg);
 }
 
 @keyframes fadeIn {
@@ -620,8 +630,7 @@ section{padding:7rem 6%;max-width:1160px;margin:0 auto}
 .hobby{font-size:.88rem;color:var(--text2);display:flex;align-items:center;gap:.4rem;font-weight:500}
 
 /* ── FOOTER ── */
-footer{text-align:center;padding:2.5rem 6%;border-top:1px solid var(--border);color:var(--text2);font-size:.82rem;position:relative;z-index:1;background:var(--bg2);font-weight:500}
-.footer-graphic{width:100%;height:100px;background:url('graphics-website.png') repeat-x;background-size:auto 100%;background-position:bottom center;opacity:0.85;margin-bottom:1.5rem;border-radius:8px}
+footer{text-align:center;padding:13vw 6% 3.5rem;border-top:1px solid var(--border);color:var(--text2);font-size:.82rem;position:relative;z-index:1;background:var(--bg2) url('footer.png') no-repeat top center;background-size:100% auto;font-weight:500}
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
@@ -631,12 +640,13 @@ footer{text-align:center;padding:2.5rem 6%;border-top:1px solid var(--border);co
   .about-img{max-width:280px}
   .skills-col {position:relative;top:0}
   #expertise.active-book-mode .exp-g-col {width:100%}
-  #expertise.active-book-mode .book-container {width:100%;margin-top:1.5rem;height:auto}
+  #expertise.active-book-mode .book-container-wrap {width:100%;margin-top:1.5rem;opacity:1;pointer-events:auto}
+  #expertise.active-book-mode .book-container {height:auto}
   .book-pages {flex-direction:column}
   .book-page {width:100%;height:auto;padding:1.8rem}
   .book-page.right-page {height:250px}
   .book-spine {display:none}
-  .book-controls {position:relative;bottom:0;left:0;right:0;margin-top:1.5rem;padding:0 1.8rem 1.8rem}
+  .book-controls-outer {margin-top:1rem}
 }
 @media(max-width:768px){
   .nav-links{display:none}
@@ -870,30 +880,30 @@ footer{text-align:center;padding:2.5rem 6%;border-top:1px solid var(--border);co
       </div>
     </div>
     
-    <div class="book-container" id="book-container">
-      <div class="book-spine"></div>
-      <div class="book-pages">
-        <div class="book-page left-page">
-          <div class="book-text">
-            <span class="book-page-num" id="book-num">01</span>
-            <h3 class="book-page-title" id="book-title">Agricultural Programme Management</h3>
-            <p class="book-page-desc" id="book-desc">Description will appear here.</p>
+    <div class="book-container-wrap" id="book-container-wrap">
+      <div class="book-container" id="book-container">
+        <button class="book-close-btn" id="book-close" aria-label="Close Book">✕</button>
+        <div class="book-spine"></div>
+        <div class="book-pages">
+          <div class="book-page left-page">
+            <div class="book-text">
+              <span class="book-page-num" id="book-num">01</span>
+              <h3 class="book-page-title" id="book-title">Agricultural Programme Management</h3>
+              <p class="book-page-desc" id="book-desc">Description will appear here.</p>
+            </div>
           </div>
-        </div>
-        <div class="book-page right-page">
-          <div class="book-img-wrap">
-            <img src="exp-ag-mgmt.png" id="book-img" alt="Expertise illustration">
+          <div class="book-page right-page">
+            <div class="book-img-wrap">
+              <img src="exp-ag-mgmt.png" id="book-img" alt="Expertise illustration">
+            </div>
           </div>
         </div>
       </div>
       
-      <div class="book-controls">
-        <div class="book-nav-btns">
-          <button class="book-btn" id="book-prev">← Prev</button>
-          <button class="book-btn" id="book-next">Next →</button>
-        </div>
+      <div class="book-controls-outer" id="book-controls-outer">
+        <button class="book-btn" id="book-prev">← Prev</button>
         <span class="book-indicator" id="book-indicator">1 of 6</span>
-        <button class="book-close-btn" id="book-close">✕ Close</button>
+        <button class="book-btn" id="book-next">Next →</button>
       </div>
     </div>
   </div>
@@ -1127,7 +1137,6 @@ footer{text-align:center;padding:2.5rem 6%;border-top:1px solid var(--border);co
 </main>
 
 <footer>
-  <div class="footer-graphic"></div>
   <div>© 2025 Rajesh Kumar Bishnoi · Göttingen, Germany · Built with purpose 🌾</div>
 </footer>
 

@@ -764,9 +764,9 @@ footer{text-align:center;padding:3.5rem 6% 12vw;border-top:1px solid var(--borde
     </div>
   </div>
   <div class="stats rev">
-    <div><span class="stat-v">2K+</span><span class="stat-l">Farmers trained in India</span></div>
-    <div><span class="stat-v">4+</span><span class="stat-l">Years in rural development</span></div>
-    <div><span class="stat-v">500+</span><span class="stat-l">LinkedIn connections</span></div>
+    <div><span class="stat-v" data-target="2000" data-format="k">0</span><span class="stat-l">Farmers trained in India</span></div>
+    <div><span class="stat-v" data-target="4">0</span><span class="stat-l">Years in rural development</span></div>
+    <div><span class="stat-v" data-target="500">0</span><span class="stat-l">LinkedIn connections</span></div>
   </div>
 </section>
 
@@ -1429,6 +1429,63 @@ thumbs.forEach(thumb => {
     }, 180);
   });
 });
+
+// ── STATS COUNT-UP LOGIC ──
+const stats = document.querySelectorAll('.stat-v');
+const statsSection = document.querySelector('.stats');
+
+function formatK(val) {
+  if (val >= 1000) {
+    const kVal = (val / 1000).toFixed(1);
+    return kVal.endsWith('.0') ? kVal.slice(0, -2) + 'K' : kVal + 'K';
+  }
+  return val;
+}
+
+function animateStats() {
+  stats.forEach(stat => {
+    const target = +stat.getAttribute('data-target');
+    const format = stat.getAttribute('data-format');
+    const duration = 1600; // duration in ms
+    let startTime = null;
+
+    function update(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const easeProgress = 1 - Math.pow(1 - progress, 3); // cubic ease-out
+      const current = Math.floor(easeProgress * target);
+
+      if (format === 'k') {
+        stat.textContent = formatK(current) + '+';
+      } else {
+        stat.textContent = current + '+';
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        if (format === 'k') {
+          stat.textContent = formatK(target) + '+';
+        } else {
+          stat.textContent = target + '+';
+        }
+      }
+    }
+    requestAnimationFrame(update);
+  });
+}
+
+if (statsSection && stats.length > 0) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateStats();
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  observer.observe(statsSection);
+}
 </script>
 </body>
 </html>

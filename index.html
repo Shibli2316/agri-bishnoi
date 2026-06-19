@@ -80,15 +80,24 @@ section{padding:7rem 6%;max-width:1160px;margin:0 auto}
 .rev-up.on{opacity:1;transform:none}
 
 /* ── HERO ── */
-#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 6% 5rem;max-width:100%;position:relative;overflow:hidden}
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 6% 4rem;max-width:100%;position:relative;overflow:hidden}
+.hero-wrapper {display:grid;grid-template-columns:1.15fr 0.85fr;gap:4.5rem;align-items:center;width:100%;margin-bottom:1rem}
+.hero-content {display:flex;flex-direction:column;justify-content:center}
 .badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(45,106,79,.06);border:1px solid rgba(45,106,79,.16);border-radius:50px;padding:.4rem 1.1rem;font-size:.78rem;color:var(--green);margin-bottom:2rem;width:fit-content;font-weight:600}
 .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.6)}}
-.hero-h{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,6vw,5.2rem);line-height:1.08;margin-bottom:1.4rem;max-width:820px;color:var(--text)}
+.hero-h{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,6.2vw,4.8rem);line-height:1.08;margin-bottom:1.4rem;color:var(--text)}
 .hero-h em{font-style:italic;color:var(--clay);font-weight:400}
-.hero-sub{font-size:clamp(.95rem,1.4vw,1.15rem);color:var(--text2);max-width:560px;line-height:1.75;margin-bottom:.9rem}
-.hero-loc{display:flex;align-items:center;gap:.45rem;color:var(--text3);font-size:.88rem;margin-bottom:2.8rem}
+.hero-sub{font-size:clamp(.95rem,1.4vw,1.12rem);color:var(--text2);max-width:560px;line-height:1.75;margin-bottom:1rem}
+.hero-loc{display:flex;align-items:center;gap:.45rem;color:var(--text3);font-size:.88rem;margin-bottom:2rem}
 .hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
+.hero-gallery {display:flex;flex-direction:column;gap:1rem;width:100%;z-index:2}
+.hero-main-img-box {width:100%;height:330px;border-radius:var(--r);overflow:hidden;box-shadow:var(--card-shadow);border:1px solid var(--border);background:#fff}
+.hero-main-img-box img {width:100%;height:100%;object-fit:cover;transition:opacity 0.25s ease,transform 0.25s ease}
+.hero-thumbnails {display:flex;gap:0.75rem;justify-content:space-between;width:100%}
+.hero-thumb {width:calc(25% - 0.56rem);height:68px;border-radius:8px;cursor:pointer;object-fit:cover;border:2px solid transparent;box-shadow:var(--card-shadow);transition:all 0.25s;opacity:0.75;background:#fff}
+.hero-thumb:hover {opacity:1;transform:translateY(-2px)}
+.hero-thumb.active {border-color:var(--clay);opacity:1;transform:translateY(-2px);box-shadow:var(--card-shadow-h)}
 .btn-p{background:var(--green);color:#fff;padding:.82rem 1.9rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:.88rem;border:none;cursor:none;transition:all .3s;display:inline-block}
 .btn-p:hover{background:var(--green-d);transform:translateY(-2px);box-shadow:0 8px 24px rgba(45,106,79,.18)}
 .btn-s{background:transparent;color:var(--text);padding:.82rem 1.9rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:.88rem;border:1px solid var(--border);transition:all .3s;display:inline-block}
@@ -630,10 +639,17 @@ section{padding:7rem 6%;max-width:1160px;margin:0 auto}
 .hobby{font-size:.88rem;color:var(--text2);display:flex;align-items:center;gap:.4rem;font-weight:500}
 
 /* ── FOOTER ── */
-footer{text-align:center;padding:13vw 6% 3.5rem;border-top:1px solid var(--border);color:var(--text2);font-size:.82rem;position:relative;z-index:1;background:var(--bg2) url('footer.png') no-repeat top center;background-size:100% auto;font-weight:500}
+footer{text-align:center;padding:3.5rem 6% 12vw;border-top:1px solid var(--border);color:var(--text2);font-size:.82rem;position:relative;z-index:1;background:var(--bg2) url('footer.png') no-repeat bottom center;background-size:100% auto;font-weight:500}
+.footer-content{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:2.5rem;position:relative;z-index:3}
+.footer-credit{font-size:0.76rem;color:var(--text3)}
+.footer-credit a{color:var(--clay);text-decoration:none;font-weight:600;transition:color 0.2s}
+.footer-credit a:hover{color:var(--green);text-decoration:underline}
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
+  .hero-wrapper {grid-template-columns:1fr;gap:3rem}
+  .hero-main-img-box {height:270px}
+  .hero-thumb {height:58px}
   .about-g,.contact-g,.academic-g{grid-template-columns:1fr;gap:2.5rem}
   .build-g{grid-template-columns:1fr}
   .sdg-g{grid-template-columns:repeat(2,1fr)}
@@ -647,6 +663,7 @@ footer{text-align:center;padding:13vw 6% 3.5rem;border-top:1px solid var(--borde
   .book-page.right-page {height:250px}
   .book-spine {display:none}
   .book-controls-outer {margin-top:1rem}
+  footer {padding:2.5rem 6% 120px;background-size:auto 100px}
 }
 @media(max-width:768px){
   .nav-links{display:none}
@@ -718,18 +735,33 @@ footer{text-align:center;padding:13vw 6% 3.5rem;border-top:1px solid var(--borde
 
 <!-- ═══ HERO ═══ -->
 <section id="hero">
-  <div class="badge"><span class="badge-dot"></span>Student · Sustainable Agriculture · Rural Development</div>
-  <h1 class="hero-h rev">
-    I understand<br>rural development<br><em>(at least a bit of it)</em>
-  </h1>
-  <p class="hero-sub rev">Rural development professional. University of Göttingen, Germany. From paddy belts in Bihar to maize fields of Southern Rajasthan.</p>
-  <div class="hero-loc rev">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-    Göttingen, Germany
-  </div>
-  <div class="hero-cta rev">
-    <a href="#contact" class="btn-p">Get in touch</a>
-    <a href="#journey" class="btn-s">Explore journey</a>
+  <div class="hero-wrapper">
+    <div class="hero-content">
+      <div class="badge"><span class="badge-dot"></span>Student · Sustainable Agriculture · Rural Development</div>
+      <h1 class="hero-h rev">
+        I understand<br>rural development<br><em>(at least a bit of it)</em>
+      </h1>
+      <p class="hero-sub rev">Rural development professional. University of Göttingen, Germany. From paddy belts in Bihar to maize fields of Southern Rajasthan.</p>
+      <div class="hero-loc rev">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Göttingen, Germany
+      </div>
+      <div class="hero-cta rev">
+        <a href="#contact" class="btn-p">Get in touch</a>
+        <a href="#journey" class="btn-s">Explore journey</a>
+      </div>
+    </div>
+    <div class="hero-gallery rev">
+      <div class="hero-main-img-box">
+        <img id="hero-main-img" src="hero-img1.png" alt="Stepped rice paddy agricultural terrace fields in rural India">
+      </div>
+      <div class="hero-thumbnails">
+        <img class="hero-thumb active" src="hero-img1.png" alt="Stepped rice paddy agricultural terrace fields in rural India">
+        <img class="hero-thumb" src="hero-img2.png" alt="Indian farmer inspecting organic vegetable crop rows with a solar drip irrigation system">
+        <img class="hero-thumb" src="hero-img3.png" alt="Indian village community members celebrating a bountiful wheat crop harvest">
+        <img class="hero-thumb" src="hero-img4.png" alt="Modern eco-friendly greenhouse and solar panel installation in a rural Indian village field">
+      </div>
+    </div>
   </div>
   <div class="stats rev">
     <div><span class="stat-v">2K+</span><span class="stat-l">Farmers trained in India</span></div>
@@ -1137,7 +1169,10 @@ footer{text-align:center;padding:13vw 6% 3.5rem;border-top:1px solid var(--borde
 </main>
 
 <footer>
-  <div>© 2025 Rajesh Kumar Bishnoi · Göttingen, Germany · Built with purpose 🌾</div>
+  <div class="footer-content">
+    <p>© 2025 Rajesh Kumar Bishnoi · Göttingen, Germany · Built with purpose 🌾</p>
+    <p class="footer-credit">Designed &amp; Developed by <a href="https://github.com/shibli2316/" target="_blank" rel="noopener noreferrer">Shibli</a></p>
+  </div>
 </footer>
 
 <script>
@@ -1373,6 +1408,26 @@ document.addEventListener('click', (e) => {
       closeBook();
     }
   }
+});
+
+// ── HERO GALLERY LOGIC ──
+const mainImg = document.getElementById('hero-main-img');
+const thumbs = document.querySelectorAll('.hero-thumb');
+thumbs.forEach(thumb => {
+  thumb.addEventListener('click', () => {
+    thumbs.forEach(t => t.classList.remove('active'));
+    thumb.classList.add('active');
+    
+    mainImg.style.opacity = '0';
+    mainImg.style.transform = 'scale(1.02)';
+    
+    setTimeout(() => {
+      mainImg.src = thumb.src;
+      mainImg.alt = thumb.alt;
+      mainImg.style.opacity = '1';
+      mainImg.style.transform = 'scale(1)';
+    }, 180);
+  });
 });
 </script>
 </body>

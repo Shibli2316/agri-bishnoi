@@ -10,46 +10,50 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#060e07;
-  --bg2:#0b1a0d;
-  --glass:rgba(255,255,255,0.05);
-  --glass-b:rgba(255,255,255,0.09);
-  --border:rgba(255,255,255,0.08);
-  --border-h:rgba(74,222,128,0.25);
-  --green:#4ade80;
-  --green-d:#22c55e;
-  --gold:#d4a017;
-  --text:#eef2ee;
-  --text2:#8fa88f;
-  --text3:#4a5e4a;
+  --bg:#fcfaf6;
+  --bg2:#f5f2eb;
+  --glass:rgba(255,255,255,0.75);
+  --glass-b:rgba(255,255,255,0.95);
+  --border:rgba(45, 106, 79, 0.12);
+  --border-h:rgba(200, 101, 75, 0.3);
+  --green:#2d6a4f;
+  --green-d:#1b4332;
+  --clay:#c8654b;
+  --gold:#caa250;
+  --text:#1b3022;
+  --text2:#4a5c50;
+  --text3:#7e9184;
+  --card-bg:#ffffff;
+  --card-shadow:0 8px 30px rgba(45, 106, 79, 0.04);
+  --card-shadow-h:0 16px 40px rgba(45, 106, 79, 0.08);
   --r:16px;
 }
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none;line-height:1.6}
 
 /* ── CURSOR ── */
 #cur,#cur-t{position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);top:0;left:0}
 #cur{width:44px;height:44px;transition:transform .12s ease}
 #cur svg{width:100%;height:100%}
-#cur-t{width:10px;height:10px;border-radius:50%;background:rgba(74,222,128,.45);transition:left .14s ease,top .14s ease,transform .2s ease,background .2s ease}
+#cur-t{width:10px;height:10px;border-radius:50%;background:rgba(200,101,75,.6);transition:left .14s ease,top .14s ease,transform .2s ease,background .2s ease}
 body.hovering #cur{transform:translate(-50%,-50%) scale(1.9)}
-body.hovering #cur-t{transform:translate(-50%,-50%) scale(2.2);background:rgba(74,222,128,.7)}
+body.hovering #cur-t{transform:translate(-50%,-50%) scale(2.2);background:rgba(200,101,75,.85)}
 
 /* ── CANVAS ── */
 #cv{position:fixed;inset:0;z-index:0;pointer-events:none}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 6%;background:rgba(6,14,7,.75);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--border);transition:background .3s}
-nav.scrolled{background:rgba(6,14,7,.97)}
-.logo{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--green);text-decoration:none;letter-spacing:.03em}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 6%;background:rgba(252,251,247,.75);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--border);transition:all .3s}
+nav.scrolled{background:rgba(252,251,247,.96);box-shadow:0 2px 20px rgba(45,106,79,.04)}
+.logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--green);text-decoration:none;letter-spacing:.03em}
 .nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{color:var(--text2);text-decoration:none;font-size:.8rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;transition:color .25s}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:.8rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;transition:color .25s}
 .nav-links a:hover{color:var(--green)}
 .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:none;padding:4px}
 .burger span{display:block;width:22px;height:1.5px;background:var(--text);transition:.3s}
-.mob-nav{display:none;position:fixed;inset:0;background:rgba(6,14,7,.98);backdrop-filter:blur(30px);z-index:998;flex-direction:column;align-items:center;justify-content:center;gap:2.2rem}
+.mob-nav{display:none;position:fixed;inset:0;background:rgba(252,251,247,.98);backdrop-filter:blur(30px);z-index:998;flex-direction:column;align-items:center;justify-content:center;gap:2.2rem}
 .mob-nav.open{display:flex}
-.mob-nav a{color:var(--text);text-decoration:none;font-size:1.6rem;font-weight:500;transition:color .2s}
+.mob-nav a{color:var(--text);text-decoration:none;font-size:1.6rem;font-weight:600;transition:color .2s}
 .mob-nav a:hover{color:var(--green)}
 .mob-close{position:absolute;top:1.4rem;right:6%;background:none;border:none;color:var(--text);font-size:1.4rem;cursor:none}
 
@@ -57,43 +61,47 @@ nav.scrolled{background:rgba(6,14,7,.97)}
 main{position:relative;z-index:1}
 .wrap{max-width:1160px;margin:0 auto;padding:0 6%}
 section{padding:7rem 6%;max-width:1160px;margin:0 auto}
-.s-label{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:.9rem;display:block}
-.s-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.8vw,3.2rem);line-height:1.15;margin-bottom:1.3rem}
+.s-label{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:.9rem;display:block}
+.s-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.8vw,3.2rem);line-height:1.15;margin-bottom:1.3rem;color:var(--text)}
 .divider{width:52px;height:2px;background:var(--green);border-radius:2px;margin-bottom:2rem}
 
-/* ── GLASS CARD ── */
-.card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);padding:1.8rem;transition:all .3s ease}
-.card:hover{background:var(--glass-b);border-color:var(--border-h);transform:translateY(-4px);box-shadow:0 22px 55px rgba(0,0,0,.4),0 0 0 1px rgba(74,222,128,.08)}
+/* ── CARD ── */
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--card-shadow);padding:2.2rem 1.8rem;transition:all .4s cubic-bezier(0.25, 1, 0.5, 1)}
+.card:hover{border-color:var(--green);transform:translateY(-4px);box-shadow:var(--card-shadow-h)}
 
-/* ── REVEAL ── */
-.rev{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+/* ── REVEAL EFFECTS ── */
+.rev{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(0.25, 1, 0.5, 1),transform .7s cubic-bezier(0.25, 1, 0.5, 1)}
 .rev.on{opacity:1;transform:none}
 
-/* ══════════════════════════════
-   HERO
-══════════════════════════════ */
+.rev-left{opacity:0;transform:translateX(-40px);transition:opacity .8s cubic-bezier(0.25, 1, 0.5, 1),transform .8s cubic-bezier(0.25, 1, 0.5, 1)}
+.rev-left.on{opacity:1;transform:none}
+
+.rev-up{opacity:0;transform:translateY(35px);transition:opacity .8s cubic-bezier(0.25, 1, 0.5, 1),transform .8s cubic-bezier(0.25, 1, 0.5, 1)}
+.rev-up.on{opacity:1;transform:none}
+
+/* ── HERO ── */
 #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 6% 5rem;max-width:100%;position:relative;overflow:hidden}
-.badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.28);border-radius:50px;padding:.38rem 1rem;font-size:.78rem;color:var(--green);margin-bottom:2rem;width:fit-content}
+.badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(45,106,79,.06);border:1px solid rgba(45,106,79,.16);border-radius:50px;padding:.4rem 1.1rem;font-size:.78rem;color:var(--green);margin-bottom:2rem;width:fit-content;font-weight:600}
 .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.6)}}
-.hero-h{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,6vw,5.2rem);line-height:1.08;margin-bottom:1.4rem;max-width:780px}
-.hero-h em{font-style:italic;color:var(--green)}
-.hero-sub{font-size:clamp(.95rem,1.4vw,1.12rem);color:var(--text2);max-width:520px;line-height:1.75;margin-bottom:.9rem}
+.hero-h{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,6vw,5.2rem);line-height:1.08;margin-bottom:1.4rem;max-width:820px;color:var(--text)}
+.hero-h em{font-style:italic;color:var(--clay);font-weight:400}
+.hero-sub{font-size:clamp(.95rem,1.4vw,1.15rem);color:var(--text2);max-width:560px;line-height:1.75;margin-bottom:.9rem}
 .hero-loc{display:flex;align-items:center;gap:.45rem;color:var(--text3);font-size:.88rem;margin-bottom:2.8rem}
 .hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
-.btn-p{background:var(--green);color:#060e07;padding:.82rem 1.9rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:.88rem;border:none;cursor:none;transition:all .3s;display:inline-block}
-.btn-p:hover{background:#6ef09a;transform:translateY(-2px);box-shadow:0 10px 28px rgba(74,222,128,.28)}
-.btn-s{background:transparent;color:var(--text);padding:.82rem 1.9rem;border-radius:50px;text-decoration:none;font-weight:500;font-size:.88rem;border:1px solid var(--border);transition:all .3s;display:inline-block}
-.btn-s:hover{border-color:var(--green);color:var(--green)}
-.stats{display:flex;gap:3rem;margin-top:4.5rem;padding-top:3rem;border-top:1px solid var(--border);flex-wrap:wrap}
-.stat-v{font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:700;color:var(--green);display:block}
-.stat-l{font-size:.78rem;color:var(--text2);letter-spacing:.04em;display:block;margin-top:.2rem}
+.btn-p{background:var(--green);color:#fff;padding:.82rem 1.9rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:.88rem;border:none;cursor:none;transition:all .3s;display:inline-block}
+.btn-p:hover{background:var(--green-d);transform:translateY(-2px);box-shadow:0 8px 24px rgba(45,106,79,.18)}
+.btn-s{background:transparent;color:var(--text);padding:.82rem 1.9rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:.88rem;border:1px solid var(--border);transition:all .3s;display:inline-block}
+.btn-s:hover{border-color:var(--clay);color:var(--clay);background:rgba(200,101,75,.02)}
+.stats{display:flex;gap:3.5rem;margin-top:4.5rem;padding-top:3rem;border-top:1px solid var(--border);flex-wrap:wrap}
+.stat-v{font-family:'Playfair Display',serif;font-size:2.3rem;font-weight:700;color:var(--green);display:block}
+.stat-l{font-size:.78rem;color:var(--text2);letter-spacing:.04em;display:block;margin-top:.2rem;font-weight:500}
 
 /* ── BANNER ── */
-.banner-wrap{position:relative;z-index:1;overflow:hidden;height:180px}
-.banner-img{width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(.6) saturate(.65)}
-.banner-overlay{position:absolute;inset:0;background:linear-gradient(to right,var(--bg) 0%,transparent 18%,transparent 82%,var(--bg) 100%)}
-.banner-overlay2{position:absolute;inset:0;background:linear-gradient(to bottom,var(--bg) 0%,transparent 30%,transparent 70%,var(--bg) 100%)}
+.banner-wrap{position:relative;z-index:1;overflow:hidden;height:160px;margin:3rem 0;border-radius:var(--r);box-shadow:var(--card-shadow);border:1px solid var(--border)}
+.banner-img{width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(1.02) saturate(.9)}
+.banner-overlay{position:absolute;inset:0;background:linear-gradient(to right,var(--bg) 0%,transparent 15%,transparent 85%,var(--bg) 100%);pointer-events:none}
+.banner-overlay2{position:absolute;inset:0;background:linear-gradient(to bottom,var(--bg) 0%,transparent 20%,transparent 80%,var(--bg) 100%);pointer-events:none}
 
 /* ── ABOUT ── */
 .about-g{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center}
@@ -103,99 +111,532 @@ section{padding:7rem 6%;max-width:1160px;margin:0 auto}
 .lang{display:flex;flex-direction:column;gap:.25rem}
 .lang-n{font-weight:600;font-size:.9rem;color:var(--text)}
 .lang-l{font-size:.75rem;color:var(--green)}
-.lang-bar{width:100px;height:2.5px;background:rgba(255,255,255,.08);border-radius:2px;margin-top:.25rem}
+.lang-bar{width:100px;height:2.5px;background:rgba(45,106,79,.1);border-radius:2px;margin-top:.25rem}
 .lang-fill{height:100%;background:var(--green);border-radius:2px}
-.about-img{width:100%;max-width:360px;border-radius:14px;display:block;margin:0 auto}
+.about-img{width:100%;max-width:360px;border-radius:14px;display:block;margin:0 auto;box-shadow:var(--card-shadow);border:1px solid var(--border)}
 .about-img-cap{text-align:center;font-size:.75rem;color:var(--text3);margin-top:.6rem}
 
 /* ── BUILD ── */
 .build-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
-.build-icon{width:46px;height:46px;border-radius:11px;background:rgba(74,222,128,.09);border:1px solid rgba(74,222,128,.18);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.1rem}
-.build-h{font-size:1.05rem;font-weight:600;margin-bottom:.65rem}
-.build-p{font-size:.87rem;color:var(--text2);line-height:1.72;margin-bottom:1rem}
-.build-link{color:var(--green);text-decoration:none;font-size:.83rem;font-weight:500;display:inline-flex;align-items:center;gap:.3rem;transition:gap .2s}
-.build-link:hover{gap:.6rem}
-.build-coming{color:var(--text3);font-size:.82rem}
-.build-hindi{color:var(--gold);font-size:.9rem;font-family:'Noto Sans Devanagari',sans-serif}
+.build-icon{width:46px;height:46px;border-radius:11px;background:rgba(45,106,79,.06);border:1px solid rgba(45,106,79,.16);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.1rem}
+.build-h{font-size:1.1rem;font-weight:600;margin-bottom:.65rem;color:var(--text)}
+.build-p{font-size:.87rem;color:var(--text2);line-height:1.72;margin-bottom:1.2rem}
+.build-link{color:var(--green);text-decoration:none;font-size:.83rem;font-weight:600;display:inline-flex;align-items:center;gap:.3rem;transition:gap .2s}
+.build-link:hover{gap:.6rem;color:var(--green-d)}
+.build-coming{color:var(--text3);font-size:.82rem;font-weight:500}
+.build-hindi{color:var(--gold);font-size:.9rem;font-family:'Noto Sans Devanagari',sans-serif;font-weight:600}
 
-/* ── ACADEMIC ── */
-.academic-g{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+/* ── ACADEMIC (STICKY PARALLAX) ── */
+.academic-g {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  align-items: start;
+  position: relative;
+}
+.edu-col {
+  width: 100%;
+}
+.skills-col {
+  position: sticky;
+  top: 120px;
+  height: fit-content;
+}
 .timeline{position:relative;padding-left:1.8rem}
-.timeline::before{content:'';position:absolute;left:0;top:6px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--green),transparent)}
-.tl-item{position:relative;padding-bottom:2.6rem}
-.tl-item::before{content:'';position:absolute;left:-2.2rem;top:.35rem;width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 10px rgba(74,222,128,.5)}
-.tl-year{font-size:.75rem;color:var(--green);font-weight:600;letter-spacing:.1em;margin-bottom:.35rem}
-.tl-deg{font-size:1.05rem;font-weight:600;margin-bottom:.25rem}
+.timeline::before{content:'';position:absolute;left:0;top:6px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--green) 30%,rgba(45,106,79,0.1) 90%)}
+.tl-item{position:relative;padding-bottom:2.8rem;transition:opacity 0.4s,transform 0.4s}
+.tl-item::before{content:'';position:absolute;left:-2.2rem;top:.35rem;width:9px;height:9px;border-radius:50%;background:var(--border);border:1px solid var(--border);transition:all 0.3s;box-shadow:none}
+.tl-item.active-tl-item::before{background:var(--clay);border-color:var(--clay);transform:scale(1.5);box-shadow:0 0 10px rgba(200,101,75,.6)}
+.tl-item.active-tl-item{opacity:1}
+.tl-item:not(.active-tl-item){opacity:0.6}
+.tl-year{font-size:.75rem;color:var(--green);font-weight:700;letter-spacing:.1em;margin-bottom:.35rem}
+.tl-item.active-tl-item .tl-year{color:var(--clay)}
+.tl-deg{font-size:1.1rem;font-weight:600;margin-bottom:.25rem;color:var(--text)}
 .tl-inst{font-size:.87rem;color:var(--text2)}
-.cert-box{margin-top:2rem;padding:1.4rem;background:rgba(212,160,23,.07);border:1px solid rgba(212,160,23,.2);border-radius:12px}
-.cert-box h4{color:var(--gold);font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.65rem}
+.cert-box{margin-top:2rem;padding:1.4rem;background:rgba(202,162,80,.06);border:1px solid rgba(202,162,80,.2);border-radius:12px}
+.cert-box h4{color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.65rem}
 .cert-box p{color:var(--text2);font-size:.87rem;line-height:1.72}
 .cert-box strong{color:var(--gold)}
 
 /* ── SKILLS ── */
 .skills-wrap{display:flex;flex-wrap:wrap;gap:.65rem}
-.skill{background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.18);border-radius:50px;padding:.42rem 1.1rem;font-size:.82rem;color:var(--green);transition:all .28s;cursor:default}
-.skill:hover{background:rgba(74,222,128,.18);transform:translateY(-2px)}
+.skill{background:rgba(45,106,79,.05);border:1px solid rgba(45,106,79,.14);border-radius:50px;padding:.45rem 1.15rem;font-size:.82rem;color:var(--text2);transition:all .28s;cursor:default;font-weight:500}
+.skill:hover{background:var(--green);color:#fff;border-color:var(--green);transform:translateY(-2px)}
 
-/* ── EXPERTISE ── */
-.exp-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
-.exp-num{font-family:'Playfair Display',serif;font-size:2.8rem;color:rgba(74,222,128,.12);font-weight:700;line-height:1;margin-bottom:.9rem}
-.exp-h{font-size:.98rem;font-weight:600;margin-bottom:.6rem}
-.exp-p{font-size:.83rem;color:var(--text2);line-height:1.72}
+/* ── EXPERTISE BOOK LAYOUT ── */
+#expertise {
+  position: relative;
+  overflow: visible;
+}
+.expertise-wrapper {
+  display: flex;
+  gap: 2rem;
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  position: relative;
+  align-items: flex-start;
+}
+.exp-g-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+  width: 100%;
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.exp-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 2.2rem 1.8rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+}
+.exp-card:hover {
+  border-color: var(--green);
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow-h);
+}
+.exp-card.active {
+  border-color: var(--clay);
+  background: var(--bg2);
+  box-shadow: 0 4px 15px rgba(200, 101, 75, 0.1);
+}
+.exp-card .exp-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  color: rgba(200, 101, 75, 0.15);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.9rem;
+  transition: color 0.3s;
+}
+.exp-card:hover .exp-num, .exp-card.active .exp-num {
+  color: var(--clay);
+}
+.exp-card .exp-h {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+}
 
-/* ── JOURNEY ── */
-.journey-list{display:flex;flex-direction:column;gap:1.3rem}
-.j-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:.45rem;flex-wrap:wrap}
-.j-role{font-size:1.05rem;font-weight:600}
-.j-period{font-size:.76rem;color:var(--green);background:rgba(74,222,128,.09);padding:.28rem .75rem;border-radius:50px;white-space:nowrap;flex-shrink:0}
-.j-org{font-size:.86rem;color:var(--text2);margin-bottom:.9rem}
-.j-pts{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-.j-pts li{font-size:.85rem;color:var(--text2);line-height:1.72;padding-left:1.1rem;position:relative}
-.j-pts li::before{content:'→';position:absolute;left:0;color:var(--green)}
+/* Book Spread Container */
+.book-container {
+  display: flex;
+  position: relative;
+  width: 0;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  height: 0;
+  transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, height 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 30px 70px rgba(45, 106, 79, 0.08), 0 0 0 1px rgba(0,0,0,0.02);
+  border: 1px solid rgba(45, 106, 79, 0.1);
+  z-index: 10;
+}
 
-/* ── SDG ── */
-.sdg-intro{color:var(--text2);font-size:.97rem;line-height:1.75;margin-bottom:2.4rem;max-width:580px}
-.sdg-g{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem}
-.sdg{border-radius:14px;padding:1.4rem 1rem;text-align:center;color:#fff;transition:transform .3s,box-shadow .3s;cursor:default}
-.sdg:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.45)}
-.sdg-n{font-size:.65rem;font-weight:600;letter-spacing:.1em;opacity:.8;margin-bottom:.4rem}
-.sdg-ico{font-size:1.8rem;margin-bottom:.6rem}
-.sdg-t{font-size:.78rem;font-weight:600;line-height:1.3}
-.sdg-1{background:#E5243B}.sdg-2{background:#DDA63A}.sdg-5{background:#FF3A21}
-.sdg-7{background:#FCC30B;color:#333}.sdg-8{background:#A21942}.sdg-13{background:#3F7E44}
-.sdg-15{background:#56C02B}.sdg-17{background:#19486A}
+/* Active Book layout */
+#expertise.active-book-mode .exp-g-col {
+  grid-template-columns: 1fr;
+  width: 320px;
+  flex-shrink: 0;
+}
+#expertise.active-book-mode .exp-card {
+  padding: 1.1rem 1.4rem;
+}
+#expertise.active-book-mode .exp-card .exp-num {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+}
+#expertise.active-book-mode .exp-card .exp-h {
+  font-size: 0.95rem;
+}
+#expertise.active-book-mode .book-container {
+  width: calc(100% - 340px);
+  opacity: 1;
+  pointer-events: auto;
+  height: 480px;
+}
+
+.book-pages {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.book-page {
+  width: 50%;
+  height: 100%;
+  padding: 3rem 2.5rem;
+  overflow-y: auto;
+  position: relative;
+}
+.book-page.left-page {
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  background: #fdfdfb;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.book-page.right-page {
+  background: #fafaf7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+}
+.book-img-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.book-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.book-text {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: fadeIn 0.4s ease;
+}
+.book-page-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: var(--clay);
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+.book-page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--text);
+  margin-bottom: 1.2rem;
+  line-height: 1.3;
+}
+.book-page-desc {
+  font-size: 0.95rem;
+  color: var(--text2);
+  line-height: 1.75;
+}
+.book-spine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  transform: translateX(-50%);
+  background: linear-gradient(to right, rgba(0,0,0,0.03) 0%, transparent 40%, transparent 60%, rgba(0,0,0,0.03) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.book-controls {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 2.5rem;
+  right: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 5;
+}
+.book-nav-btns {
+  display: flex;
+  gap: 0.5rem;
+}
+.book-btn {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.45rem 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.book-btn:hover {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+}
+.book-indicator {
+  font-size: 0.8rem;
+  color: var(--text2);
+  font-weight: 600;
+}
+.book-close-btn {
+  background: rgba(200, 101, 75, 0.1);
+  border: 1px solid rgba(200, 101, 75, 0.2);
+  color: var(--clay);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.45rem 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.book-close-btn:hover {
+  background: var(--clay);
+  color: #fff;
+  border-color: var(--clay);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── EXPERIENCE STICKY LAYOUT ── */
+.journey-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+.job-block {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 4rem;
+  align-items: start;
+  position: relative;
+  padding-bottom: 3.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.job-block:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.job-meta {
+  position: sticky;
+  top: 140px;
+  height: fit-content;
+}
+.job-meta .j-period {
+  font-size: 0.78rem;
+  color: var(--clay);
+  background: rgba(200, 101, 75, 0.08);
+  padding: 0.35rem 0.9rem;
+  border-radius: 50px;
+  display: inline-block;
+  margin-bottom: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+.job-meta .j-role {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--text);
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  line-height: 1.2;
+}
+.job-meta .j-subrole {
+  font-size: 1.1rem;
+  color: var(--green);
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+.job-meta .j-org {
+  font-size: 0.92rem;
+  color: var(--text2);
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.job-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.job-img-box {
+  width: 100%;
+  height: 280px;
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border);
+}
+.job-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.job-points {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.j-pt-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.4rem 1.6rem;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  transition: all 0.3s;
+}
+.j-pt-card:hover {
+  border-color: var(--green);
+  transform: translateY(-2px);
+  box-shadow: var(--card-shadow-h);
+}
+.j-pt-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--clay);
+  font-weight: 700;
+  line-height: 1;
+  margin-top: 0.15rem;
+}
+.j-pt-card p {
+  font-size: 0.88rem;
+  color: var(--text2);
+  line-height: 1.65;
+  margin: 0;
+  font-weight: 400;
+}
+.rev-each {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.rev-each.on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── PROFESSIONAL SDG SECTION ── */
+.sdg-intro {
+  color: var(--text2);
+  font-size: 1.02rem;
+  line-height: 1.8;
+  margin-bottom: 3rem;
+  max-width: 680px;
+}
+.sdg-g {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem;
+}
+.sdg-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.8rem 1.4rem;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.sdg-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow-h);
+  border-color: var(--sdg-color);
+}
+.sdg-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--sdg-color);
+}
+.sdg-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sdg-num {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--sdg-color);
+  letter-spacing: 0.08em;
+  background: var(--sdg-bg-light);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+}
+.sdg-icon-svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--sdg-color);
+}
+.sdg-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+.sdg-contrib {
+  font-size: 0.78rem;
+  color: var(--text2);
+  line-height: 1.5;
+  border-top: 1px solid var(--border);
+  padding-top: 0.6rem;
+  margin-top: 0.2rem;
+  font-style: italic;
+}
 
 /* ── FUTURE ── */
-.future{text-align:center;padding:4rem 2rem;background:rgba(74,222,128,.03);border:1px solid rgba(74,222,128,.1);border-radius:24px;max-width:720px;margin:0 auto}
-.future-brand{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,4rem);color:var(--green);margin-bottom:.7rem}
-.future-dev{font-family:'Noto Sans Devanagari',sans-serif;font-size:1.15rem;color:var(--gold);margin-bottom:1rem}
+.future{text-align:center;padding:4rem 2rem;background:rgba(45,106,79,.03);border:1px solid rgba(45,106,79,.1);border-radius:24px;max-width:720px;margin:0 auto}
+.future-brand{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,4rem);color:var(--green);margin-bottom:.7rem;font-weight:700}
+.future-dev{font-family:'Noto Sans Devanagari',sans-serif;font-size:1.15rem;color:var(--gold);margin-bottom:1rem;font-weight:600}
 .future-desc{color:var(--text2);font-size:.97rem;line-height:1.75}
 
 /* ── CONTACT ── */
 .contact-g{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
 .c-tagline{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.8vw,2.2rem);font-style:italic;color:var(--text2);margin-bottom:2rem;line-height:1.45}
-.c-tagline span{color:var(--green)}
+.c-tagline span{color:var(--clay)}
 .c-info{display:flex;flex-direction:column;gap:1.1rem}
-.c-item{display:flex;align-items:center;gap:.9rem;color:var(--text2);font-size:.93rem;text-decoration:none;transition:color .25s}
+.c-item{display:flex;align-items:center;gap:.9rem;color:var(--text2);font-size:.93rem;text-decoration:none;transition:color .25s;font-weight:500}
 .c-item:hover{color:var(--green)}
-.c-ico{width:38px;height:38px;background:var(--glass);border:1px solid var(--border);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
-.open-for{margin-top:2rem;padding:1.4rem;background:rgba(74,222,128,.04);border:1px solid rgba(74,222,128,.13);border-radius:12px}
-.open-for h4{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:.9rem}
+.c-ico{width:38px;height:38px;background:var(--bg2);border:1px solid var(--border);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.open-for{margin-top:2rem;padding:1.4rem;background:rgba(45,106,79,.04);border:1px solid rgba(45,106,79,.12);border-radius:12px}
+.open-for h4{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:.9rem}
 .of-tags{display:flex;flex-wrap:wrap;gap:.45rem}
-.of-tag{font-size:.79rem;color:var(--text2);background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:6px;padding:.28rem .65rem}
+.of-tag{font-size:.79rem;color:var(--text2);background:rgba(255,255,255,.6);border:1px solid var(--border);border-radius:6px;padding:.28rem .65rem;font-weight:500}
 .hobbies{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:1.5rem}
-.hobby{font-size:.88rem;color:var(--text2);display:flex;align-items:center;gap:.4rem}
+.hobby{font-size:.88rem;color:var(--text2);display:flex;align-items:center;gap:.4rem;font-weight:500}
 
 /* ── FOOTER ── */
-footer{text-align:center;padding:1.8rem 6%;border-top:1px solid var(--border);color:var(--text3);font-size:.78rem;position:relative;z-index:1}
+footer{text-align:center;padding:2.5rem 6%;border-top:1px solid var(--border);color:var(--text2);font-size:.82rem;position:relative;z-index:1;background:var(--bg2);font-weight:500}
+.footer-graphic{width:100%;height:100px;background:url('graphics-website.png') repeat-x;background-size:auto 100%;background-position:bottom center;opacity:0.85;margin-bottom:1.5rem;border-radius:8px}
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   .about-g,.contact-g,.academic-g{grid-template-columns:1fr;gap:2.5rem}
   .build-g{grid-template-columns:1fr}
-  .exp-g{grid-template-columns:1fr 1fr}
   .sdg-g{grid-template-columns:repeat(2,1fr)}
   .about-img{max-width:280px}
+  .skills-col {position:relative;top:0}
+  #expertise.active-book-mode .exp-g-col {width:100%}
+  #expertise.active-book-mode .book-container {width:100%;margin-top:1.5rem;height:auto}
+  .book-pages {flex-direction:column}
+  .book-page {width:100%;height:auto;padding:1.8rem}
+  .book-page.right-page {height:250px}
+  .book-spine {display:none}
+  .book-controls {position:relative;bottom:0;left:0;right:0;margin-top:1.5rem;padding:0 1.8rem 1.8rem}
 }
 @media(max-width:768px){
   .nav-links{display:none}
@@ -203,17 +644,16 @@ footer{text-align:center;padding:1.8rem 6%;border-top:1px solid var(--border);co
   section{padding:4.5rem 5%}
   #hero{padding:7rem 5% 4rem}
   .stats{gap:1.8rem}
-  .exp-g{grid-template-columns:1fr}
 }
 @media(max-width:480px){
-  .sdg-g{grid-template-columns:repeat(2,1fr)}
-  .hero-h{font-size:2rem}
+  .sdg-g{grid-template-columns:1fr}
+  .hero-h{font-size:2.1rem}
   .future{padding:2.5rem 1.2rem}
 }
 @media(hover:none){
   #cur,#cur-t{display:none}
   body{cursor:auto}
-  .btn-p,.burger,.mob-close,.skill,.sdg,.card{cursor:pointer}
+  .btn-p,.burger,.mob-close,.skill,.sdg-card,.card,.exp-card{cursor:pointer}
 }
 </style>
 </head>
@@ -222,12 +662,12 @@ footer{text-align:center;padding:1.8rem 6%;border-top:1px solid var(--border);co
 <!-- CURSOR -->
 <div id="cur">
   <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="22" cy="22" r="20" stroke="rgba(74,222,128,0.85)" stroke-width="1.4"/>
-    <ellipse cx="22" cy="19" rx="4.5" ry="7.5" fill="rgba(74,222,128,0.28)" stroke="rgba(74,222,128,0.6)" stroke-width="1" transform="rotate(-15 22 19)"/>
-    <ellipse cx="22" cy="19" rx="4.5" ry="7.5" fill="rgba(74,222,128,0.15)" stroke="rgba(74,222,128,0.4)" stroke-width="1" transform="rotate(15 22 19)"/>
-    <line x1="22" y1="26" x2="22" y2="36" stroke="rgba(74,222,128,0.55)" stroke-width="1.2"/>
-    <line x1="22" y1="30" x2="19" y2="33" stroke="rgba(74,222,128,0.35)" stroke-width="1"/>
-    <line x1="22" y1="32" x2="25" y2="35" stroke="rgba(74,222,128,0.35)" stroke-width="1"/>
+    <circle cx="22" cy="22" r="20" stroke="rgba(45,106,79,0.85)" stroke-width="1.4"/>
+    <ellipse cx="22" cy="19" rx="4.5" ry="7.5" fill="rgba(45,106,79,0.15)" stroke="rgba(45,106,79,0.4)" stroke-width="1" transform="rotate(-15 22 19)"/>
+    <ellipse cx="22" cy="19" rx="4.5" ry="7.5" fill="rgba(45,106,79,0.08)" stroke="rgba(45,106,79,0.25)" stroke-width="1" transform="rotate(15 22 19)"/>
+    <line x1="22" y1="26" x2="22" y2="36" stroke="rgba(45,106,79,0.55)" stroke-width="1.2"/>
+    <line x1="22" y1="30" x2="19" y2="33" stroke="rgba(45,106,79,0.35)" stroke-width="1"/>
+    <line x1="22" y1="32" x2="25" y2="35" stroke="rgba(45,106,79,0.35)" stroke-width="1"/>
   </svg>
 </div>
 <div id="cur-t"></div>
@@ -288,13 +728,6 @@ footer{text-align:center;padding:1.8rem 6%;border-top:1px solid var(--border);co
   </div>
 </section>
 
-<!-- RURAL BANNER -->
-<div class="banner-wrap">
-  <img src="graphics-website.png" alt="Rural India — village, farmers, livestock and solar energy" class="banner-img">
-  <div class="banner-overlay"></div>
-  <div class="banner-overlay2"></div>
-</div>
-
 <!-- ═══ ABOUT ═══ -->
 <section id="about" class="rev">
   <div class="about-g">
@@ -320,24 +753,24 @@ footer{text-align:center;padding:1.8rem 6%;border-top:1px solid var(--border);co
 </section>
 
 <!-- ═══ WHAT I BUILD ═══ -->
-<section id="build" class="rev">
-  <span class="s-label">Work &amp; Initiatives</span>
-  <h2 class="s-title">What I build</h2>
-  <div class="divider"></div>
+<section id="build">
+  <span class="s-label rev">Work &amp; Initiatives</span>
+  <h2 class="s-title rev">What I build</h2>
+  <div class="divider rev"></div>
   <div class="build-g">
-    <div class="card">
+    <div class="card rev-left" style="transition-delay: 0s;">
       <div class="build-icon">💼</div>
       <h3 class="build-h">LinkedIn</h3>
       <p class="build-p">My professional hub — sharing insights on rural development, sustainable agriculture, MEAL frameworks, and the smallholder story. 500+ connections across the agri-development space.</p>
       <a href="https://www.linkedin.com/in/rajesh209e/" target="_blank" rel="noopener noreferrer" class="build-link">View Profile →</a>
     </div>
-    <div class="card">
+    <div class="card rev-left" style="transition-delay: 0.15s;">
       <div class="build-icon">🌱</div>
       <h3 class="build-h">Aadayant Agri Services</h3>
       <p class="build-p">An agri-enterprise bridging modern agricultural solutions with smallholder farmers in India — from protected cultivation to market linkages and capacity building.</p>
       <span class="build-coming">Coming Soon</span>
     </div>
-    <div class="card">
+    <div class="card rev-left" style="transition-delay: 0.3s;">
       <div class="build-icon">🌐</div>
       <h3 class="build-h">AAS Internationals</h3>
       <p class="build-p">The international arm of the AAS brand — connecting Indian agricultural expertise with global markets, research partnerships, and cross-border development initiatives.</p>
@@ -347,35 +780,35 @@ footer{text-align:center;padding:1.8rem 6%;border-top:1px solid var(--border);co
 </section>
 
 <!-- ═══ ACADEMIC ═══ -->
-<section id="academic" class="rev">
+<section id="academic">
   <div class="academic-g">
-    <div>
-      <span class="s-label">Education</span>
-      <h2 class="s-title">Academic foundation</h2>
-      <div class="divider"></div>
+    <div class="edu-col">
+      <span class="s-label rev">Education</span>
+      <h2 class="s-title rev">Academic foundation</h2>
+      <div class="divider rev"></div>
       <div class="timeline">
-        <div class="tl-item">
+        <div class="tl-item rev-up">
           <div class="tl-year">2024 — Present</div>
           <div class="tl-deg">M.Sc. Sustainable International Agriculture</div>
           <div class="tl-inst">Georg-August-Universität Göttingen, Germany</div>
         </div>
-        <div class="tl-item">
+        <div class="tl-item rev-up">
           <div class="tl-year">2017 — 2019</div>
           <div class="tl-deg">Masters in Agri Business Management</div>
           <div class="tl-inst">Dr. RPCAU, Pusa, Samastipur, Bihar</div>
         </div>
-        <div class="tl-item">
+        <div class="tl-item rev-up">
           <div class="tl-year">2013 — 2017</div>
           <div class="tl-deg">B.Sc. (Hons.) Agriculture</div>
           <div class="tl-inst">Lovely Professional University, Phagwara, Punjab</div>
         </div>
-        <div class="cert-box">
+        <div class="cert-box rev-up">
           <h4>🏅 International Certification</h4>
           <p>Climate Change Impact on Horticultural Crops — University of Agronomic Sciences and Veterinary Medicine of Bucharest (USAMV), Romania.<br><br>Funded by <strong>ERASMUS+ Exchange &amp; DAAD Scholarship</strong>.</p>
         </div>
       </div>
     </div>
-    <div>
+    <div class="skills-col rev">
       <span class="s-label">Skills</span>
       <h2 class="s-title">Core skills</h2>
       <div class="divider"></div>
@@ -404,81 +837,147 @@ footer{text-align:center;padding:1.8rem 6%;border-top:1px solid var(--border);co
 </section>
 
 <!-- ═══ EXPERTISE ═══ -->
-<section id="expertise" class="rev">
-  <span class="s-label">Core Strengths</span>
-  <h2 class="s-title">Areas of expertise</h2>
-  <div class="divider"></div>
-  <div class="exp-g">
-    <div class="card">
-      <div class="exp-num">01</div>
-      <h3 class="exp-h">Agricultural Programme Management</h3>
-      <p class="exp-p">FPOs, smallholder farmer projects, livelihood programmes, women-led enterprises, sustainable agriculture systems, and protected cultivation / hydroponics.</p>
+<section id="expertise">
+  <span class="s-label rev">Core Strengths</span>
+  <h2 class="s-title rev">Areas of expertise</h2>
+  <div class="divider rev"></div>
+  
+  <div class="expertise-wrapper" id="expertise-container">
+    <div class="exp-g-col" id="expertise-cards">
+      <div class="exp-card rev-up" style="transition-delay: 0s;">
+        <div class="exp-num">01</div>
+        <h3 class="exp-h">Agricultural Programme Management</h3>
+      </div>
+      <div class="exp-card rev-up" style="transition-delay: 0.1s;">
+        <div class="exp-num">02</div>
+        <h3 class="exp-h">MEAL Frameworks</h3>
+      </div>
+      <div class="exp-card rev-up" style="transition-delay: 0.2s;">
+        <div class="exp-num">03</div>
+        <h3 class="exp-h">Data Analysis &amp; Impact Reporting</h3>
+      </div>
+      <div class="exp-card rev-up" style="transition-delay: 0.3s;">
+        <div class="exp-num">04</div>
+        <h3 class="exp-h">Capacity Building &amp; Training</h3>
+      </div>
+      <div class="exp-card rev-up" style="transition-delay: 0.4s;">
+        <div class="exp-num">05</div>
+        <h3 class="exp-h">Sustainable &amp; Climate-Smart Agriculture</h3>
+      </div>
+      <div class="exp-card rev-up" style="transition-delay: 0.5s;">
+        <div class="exp-num">06</div>
+        <h3 class="exp-h">Stakeholder &amp; Partnership Management</h3>
+      </div>
     </div>
-    <div class="card">
-      <div class="exp-num">02</div>
-      <h3 class="exp-h">MEAL Frameworks</h3>
-      <p class="exp-p">Strongest professional niche — performance indicators, data collection systems, impact measurement, donor reporting, and programme evaluation combining ag + MEAL.</p>
-    </div>
-    <div class="card">
-      <div class="exp-num">03</div>
-      <h3 class="exp-h">Data Analysis &amp; Impact Reporting</h3>
-      <p class="exp-p">Excel, Power Query, data visualization, field data analysis, research interpretation, and impact communication for NGO research, impact analyst, and policy roles.</p>
-    </div>
-    <div class="card">
-      <div class="exp-num">04</div>
-      <h3 class="exp-h">Capacity Building &amp; Training</h3>
-      <p class="exp-p">Farmer training, workshop design, training manuals, knowledge-sharing materials, and capacity-building systems — highly valued in international development NGOs.</p>
-    </div>
-    <div class="card">
-      <div class="exp-num">05</div>
-      <h3 class="exp-h">Sustainable &amp; Climate-Smart Agriculture</h3>
-      <p class="exp-p">Sustainable agriculture, soil-less cultivation, climate resilience, farmer livelihood systems, and rural development — backed by M.Sc. in Sustainable International Agriculture.</p>
-    </div>
-    <div class="card">
-      <div class="exp-num">06</div>
-      <h3 class="exp-h">Stakeholder &amp; Partnership Management</h3>
-      <p class="exp-p">Government coordination, NGO collaboration, multi-stakeholder communication, and institutional partnerships — critical for development consulting roles.</p>
+    
+    <div class="book-container" id="book-container">
+      <div class="book-spine"></div>
+      <div class="book-pages">
+        <div class="book-page left-page">
+          <div class="book-text">
+            <span class="book-page-num" id="book-num">01</span>
+            <h3 class="book-page-title" id="book-title">Agricultural Programme Management</h3>
+            <p class="book-page-desc" id="book-desc">Description will appear here.</p>
+          </div>
+        </div>
+        <div class="book-page right-page">
+          <div class="book-img-wrap">
+            <img src="exp-ag-mgmt.png" id="book-img" alt="Expertise illustration">
+          </div>
+        </div>
+      </div>
+      
+      <div class="book-controls">
+        <div class="book-nav-btns">
+          <button class="book-btn" id="book-prev">← Prev</button>
+          <button class="book-btn" id="book-next">Next →</button>
+        </div>
+        <span class="book-indicator" id="book-indicator">1 of 6</span>
+        <button class="book-close-btn" id="book-close">✕ Close</button>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ═══ PROFESSIONAL JOURNEY ═══ -->
-<section id="journey" class="rev">
-  <span class="s-label">Professional Journey</span>
-  <h2 class="s-title">4+ years across diverse areas</h2>
-  <div class="divider"></div>
+<section id="journey">
+  <span class="s-label rev">Professional Journey</span>
+  <h2 class="s-title rev">4+ years across diverse areas</h2>
+  <div class="divider rev"></div>
+  
   <div class="journey-list">
-    <div class="card">
-      <div class="j-head">
-        <div>
-          <div class="j-role">Programme Officer – MEAL &amp; Project Management</div>
-          <div class="j-org">CUTS International (Consumer Unity &amp; Trust Society) | India</div>
-        </div>
+    <!-- CUTS BLOCK -->
+    <div class="job-block">
+      <div class="job-meta rev">
         <span class="j-period">Aug 2022 – Aug 2024</span>
+        <h3 class="j-role">Programme Officer</h3>
+        <h4 class="j-subrole">MEAL &amp; Project Management</h4>
+        <div class="j-org">CUTS International (Consumer Unity &amp; Trust Society) | India</div>
       </div>
-      <ul class="j-pts">
-        <li>Supported project monitoring and evaluation across the CSS-FPO programme, tracking performance against defined indicators and compiling data progress for donor reporting.</li>
-        <li>Collected and analysed quantitative and qualitative reach data from smallholder farmer projects; synthesised findings into reports and visualisations for programme management and institutional donors.</li>
-        <li>Developed knowledge management products including guidelines, concept notes, and project proposals — transforming evidence into actionable written outputs.</li>
-        <li>Built and maintained strategic partnerships with government institutions, NGOs, and private sector actors; communicated programme results to multi-stakeholder audiences.</li>
-        <li>Contributed to development of a market performance measurement framework integrating ONDC data to track agricultural product reach and impact.</li>
-        <li>Designed capacity-building workshops and training materials for farmers and field staff.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <div class="j-head">
-        <div>
-          <div class="j-role">Project Executive – Programme Support</div>
-          <div class="j-org">Professional Assistance for Development Action (PRADAN) | India</div>
+      <div class="job-details">
+        <div class="job-img-box rev-each">
+          <img src="job-cuts.png" alt="CUTS International Livelihood Monitoring">
         </div>
-        <span class="j-period">Nov 2018 – Nov 2021</span>
+        <div class="job-points">
+          <div class="j-pt-card rev-each">
+            <span class="j-pt-num">01</span>
+            <p>Supported project monitoring and evaluation across the CSS-FPO programme, tracking performance against defined indicators and compiling data progress for donor reporting.</p>
+          </div>
+          <div class="j-pt-card rev-each">
+            <span class="j-pt-num">02</span>
+            <p>Collected and analysed quantitative and qualitative reach data from smallholder farmer projects; synthesised findings into reports and visualisations for programme management and institutional donors.</p>
+          </div>
+          <div class="j-pt-card rev-each">
+            <span class="j-pt-num">03</span>
+            <p>Developed knowledge management products including guidelines, concept notes, and project proposals — transforming evidence into actionable written outputs.</p>
+          </div>
+          <div class="j-pt-card rev-each">
+            <span class="j-pt-num">04</span>
+            <p>Built and maintained strategic partnerships with government institutions, NGOs, and private sector actors; communicated programme results to multi-stakeholder audiences.</p>
+          </div>
+          <div class="j-pt-card rev-each">
+            <span class="j-pt-num">05</span>
+            <p>Contributed to development of a market performance measurement framework integrating ONDC data to track agricultural product reach and impact.</p>
+          </div>
+          <div class="j-pt-card rev-each">
+            <span class="j-pt-num">06</span>
+            <p>Designed capacity-building workshops and training materials for farmers and field staff.</p>
+          </div>
+        </div>
       </div>
-      <ul class="j-pts">
-        <li>Collected and analysed field data on protected cultivation systems (soilless / hydroponic techniques) to monitor programme effectiveness and crop performance outcomes.</li>
-        <li>Documented results and developed knowledge-sharing materials — training manuals, case studies, and guidance notes — for 20+ nursery trainers across project sites.</li>
-        <li>Monitored and evaluated adoption rates of recommended agricultural practices; compiled findings into structured reports for programme review and decision-making.</li>
-        <li>Supported design and monitoring of women-led social enterprises, including tracking livelihood indicators and reporting on beneficiary reach and economic outcomes.</li>
-      </ul>
+    </div>
+    
+    <!-- PRADAN BLOCK -->
+    <div class="job-block">
+      <div class="job-meta rev">
+        <span class="j-period">Nov 2018 – Nov 2021</span>
+        <h3 class="j-role">Project Executive</h3>
+        <h4 class="j-subrole">Programme Support</h4>
+        <div class="j-org">Professional Assistance for Development Action (PRADAN) | India</div>
+      </div>
+      <div class="job-details">
+        <div class="job-img-box rev-each">
+          <img src="job-pradan.png" alt="PRADAN Livelihood Initiatives">
+        </div>
+        <div class="job-points">
+          <div class="j-pt-card rev-each">
+            <span class="j-pt-num">01</span>
+            <p>Collected and analysed field data on protected cultivation systems (soilless / hydroponic techniques) to monitor programme effectiveness and crop performance outcomes.</p>
+          </div>
+          <div class="j-pt-card rev-each">
+            <span class="j-pt-num">02</span>
+            <p>Documented results and developed knowledge-sharing materials — training manuals, case studies, and guidance notes — for 20+ nursery trainers across project sites.</p>
+          </div>
+          <div class="j-pt-card rev-each">
+            <span class="j-pt-num">03</span>
+            <p>Monitored and evaluated adoption rates of recommended agricultural practices; compiled findings into reports for programme review and decision-making.</p>
+          </div>
+          <div class="j-pt-card rev-each">
+            <span class="j-pt-num">04</span>
+            <p>Supported design and monitoring of women-led social enterprises, including tracking livelihood indicators and reporting on beneficiary reach and economic outcomes.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -490,14 +989,85 @@ footer{text-align:center;padding:1.8rem 6%;border-top:1px solid var(--border);co
   <div class="divider"></div>
   <p class="sdg-intro">My work in rural development, sustainable agriculture, and livelihood programmes directly contributes to these UN Sustainable Development Goals.</p>
   <div class="sdg-g">
-    <div class="sdg sdg-1"><div class="sdg-n">SDG 1</div><div class="sdg-ico">🏠</div><div class="sdg-t">No Poverty</div></div>
-    <div class="sdg sdg-2"><div class="sdg-n">SDG 2</div><div class="sdg-ico">🌾</div><div class="sdg-t">Zero Hunger</div></div>
-    <div class="sdg sdg-5"><div class="sdg-n">SDG 5</div><div class="sdg-ico">♀️</div><div class="sdg-t">Gender Equality</div></div>
-    <div class="sdg sdg-7"><div class="sdg-n">SDG 7</div><div class="sdg-ico">☀️</div><div class="sdg-t">Affordable &amp; Clean Energy</div></div>
-    <div class="sdg sdg-8"><div class="sdg-n">SDG 8</div><div class="sdg-ico">📈</div><div class="sdg-t">Decent Work &amp; Economic Growth</div></div>
-    <div class="sdg sdg-13"><div class="sdg-n">SDG 13</div><div class="sdg-ico">🌍</div><div class="sdg-t">Climate Action</div></div>
-    <div class="sdg sdg-15"><div class="sdg-n">SDG 15</div><div class="sdg-ico">🌳</div><div class="sdg-t">Life on Land</div></div>
-    <div class="sdg sdg-17"><div class="sdg-n">SDG 17</div><div class="sdg-ico">🤝</div><div class="sdg-t">Partnerships for the Goals</div></div>
+    <!-- SDG 1 -->
+    <div class="sdg-card" style="--sdg-color: #E5243B; --sdg-bg-light: rgba(229,36,59,0.08);">
+      <div class="sdg-header">
+        <span class="sdg-num">Goal 1</span>
+        <svg viewBox="0 0 24 24" class="sdg-icon-svg"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      </div>
+      <div class="sdg-title">No Poverty</div>
+      <div class="sdg-contrib">Livelihood &amp; FPO Capacity Support</div>
+    </div>
+    
+    <!-- SDG 2 -->
+    <div class="sdg-card" style="--sdg-color: #DDA63A; --sdg-bg-light: rgba(221,166,58,0.08);">
+      <div class="sdg-header">
+        <span class="sdg-num">Goal 2</span>
+        <svg viewBox="0 0 24 24" class="sdg-icon-svg"><path d="M12 3v18M8 8l4-4 4 4M8 13l4-4 4 4M8 18l4-4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+      </div>
+      <div class="sdg-title">Zero Hunger</div>
+      <div class="sdg-contrib">Sustainable &amp; Organic Agri Initiatives</div>
+    </div>
+    
+    <!-- SDG 5 -->
+    <div class="sdg-card" style="--sdg-color: #FF3A21; --sdg-bg-light: rgba(255,58,33,0.08);">
+      <div class="sdg-header">
+        <span class="sdg-num">Goal 5</span>
+        <svg viewBox="0 0 24 24" class="sdg-icon-svg"><path d="M12 2a5 5 0 0 0-5 5c0 2.3 1.5 4.2 3.7 4.8l-1.7 1.7h1.5v3H9v2h1.5v3.5h2V18.5H14v-2h-1.5v-3h1.5l-1.7-1.7a5 5 0 0 0 3.7-4.8 5 5 0 0 0-5-5zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+      </div>
+      <div class="sdg-title">Gender Equality</div>
+      <div class="sdg-contrib">Women-led Social Enterprises</div>
+    </div>
+    
+    <!-- SDG 7 -->
+    <div class="sdg-card" style="--sdg-color: #FCC30B; --sdg-bg-light: rgba(252,195,11,0.08);">
+      <div class="sdg-header">
+        <span class="sdg-num">Goal 7</span>
+        <svg viewBox="0 0 24 24" class="sdg-icon-svg"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zM4 10.5H1v2h3v-2zm9-8h-2v3h2v-3zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zM20 10.5h3v2h-3v-2zm-8-5c-3.31 0-6 2.69-6 6 0 2.22 1.21 4.15 3 5.19V20c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-3.31c1.79-1.04 3-2.97 3-5.19 0-3.31-2.69-6-6-6zm0 2a4 4 0 0 1 4 4c0 1.45-.72 2.73-1.8 3.51l-.2.13v3.36h-4v-3.36l-.2-.13c-1.08-.78-1.8-2.06-1.8-3.51a4 4 0 0 1 4-4z"/></svg>
+      </div>
+      <div class="sdg-title">Affordable Energy</div>
+      <div class="sdg-contrib">Biogas &amp; Solar Agri Systems</div>
+    </div>
+    
+    <!-- SDG 8 -->
+    <div class="sdg-card" style="--sdg-color: #A21942; --sdg-bg-light: rgba(162,25,66,0.08);">
+      <div class="sdg-header">
+        <span class="sdg-num">Goal 8</span>
+        <svg viewBox="0 0 24 24" class="sdg-icon-svg"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L3 15.67l.5 2.82z"/></svg>
+      </div>
+      <div class="sdg-title">Decent Work</div>
+      <div class="sdg-contrib">ONDC Digital Market Linkages</div>
+    </div>
+    
+    <!-- SDG 13 -->
+    <div class="sdg-card" style="--sdg-color: #3F7E44; --sdg-bg-light: rgba(63,126,68,0.08);">
+      <div class="sdg-header">
+        <span class="sdg-num">Goal 13</span>
+        <svg viewBox="0 0 24 24" class="sdg-icon-svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/></svg>
+      </div>
+      <div class="sdg-title">Climate Action</div>
+      <div class="sdg-contrib">Climate-Resilient Crop Training</div>
+    </div>
+    
+    <!-- SDG 15 -->
+    <div class="sdg-card" style="--sdg-color: #56C02B; --sdg-bg-light: rgba(86,192,43,0.08);">
+      <div class="sdg-header">
+        <span class="sdg-num">Goal 15</span>
+        <svg viewBox="0 0 24 24" class="sdg-icon-svg"><path d="M20.17 9.55c-.42-1.91-1.73-3.48-3.53-4.14C15.65 3.3 13.56 2 11.17 2c-3.23 0-6.01 2.37-6.55 5.56C2.26 8.35 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.83-5.45zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C7.71 7.74 9.07 6 11 6c2.43 0 4.47 1.87 4.67 4.3l.08 1.01 1.01.07c1.72.12 3.24 1.53 3.24 3.32 0 1.76-1.44 3.3-3 3.3z"/></svg>
+      </div>
+      <div class="sdg-title">Life on Land</div>
+      <div class="sdg-contrib">Soil Health &amp; Organic Systems</div>
+    </div>
+    
+    <!-- SDG 17 -->
+    <div class="sdg-card" style="--sdg-color: #19486A; --sdg-bg-light: rgba(25,72,106,0.08);">
+      <div class="sdg-header">
+        <span class="sdg-num">Goal 17</span>
+        <svg viewBox="0 0 24 24" class="sdg-icon-svg"><path d="M12.5 10c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5.67 1.5 1.5 1.5 1.5-.67 1.5-1.5zm-5 0c0-.83-.67-1.5-1.5-1.5S4.5 9.17 4.5 10s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5zm10 0c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5.67 1.5 1.5 1.5 1.5-.67 1.5-1.5zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/></svg>
+      </div>
+      <div class="sdg-title">Partnerships</div>
+      <div class="sdg-contrib">Erasmus+, DAAD &amp; Multi-NGO Coalitions</div>
+    </div>
   </div>
 </section>
 
@@ -556,7 +1126,10 @@ footer{text-align:center;padding:1.8rem 6%;border-top:1px solid var(--border);co
 
 </main>
 
-<footer>© 2025 Rajesh Kumar Bishnoi · Göttingen, Germany · Built with purpose 🌾</footer>
+<footer>
+  <div class="footer-graphic"></div>
+  <div>© 2025 Rajesh Kumar Bishnoi · Göttingen, Germany · Built with purpose 🌾</div>
+</footer>
 
 <script>
 // ── CURSOR ──
@@ -578,7 +1151,7 @@ document.addEventListener('mousemove', e => {
   requestAnimationFrame(animT);
 })();
 
-document.querySelectorAll('a,button,.card,.sdg,.skill,.of-tag').forEach(el => {
+document.querySelectorAll('a,button,.card,.sdg-card,.skill,.of-tag,.exp-card').forEach(el => {
   el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
   el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
 });
@@ -596,15 +1169,15 @@ class Pt {
   constructor(scattered) {
     this.x = Math.random() * W;
     this.y = scattered ? Math.random() * H : H + 10;
-    this.r = Math.random() * 1.6 + .4;
-    this.vx = (Math.random() - .5) * .25;
-    this.vy = -(Math.random() * .35 + .12);
-    this.a = Math.random() * .35 + .08;
-    this.col = Math.random() > .55 ? '74,222,128' : '212,160,23';
+    this.r = Math.random() * 2 + .5;
+    this.vx = (Math.random() - .5) * .2;
+    this.vy = -(Math.random() * .4 + .15);
+    this.a = Math.random() * .4 + .1;
+    this.col = Math.random() > .55 ? '45,106,79' : '202,162,80'; // Green and Gold
   }
   tick() {
-    this.x += this.vx; this.y += this.vy; this.a -= .0006;
-    if (this.y < -8 || this.a <= 0) { this.y = H + 8; this.x = Math.random() * W; this.a = Math.random() * .35 + .08; }
+    this.x += this.vx; this.y += this.vy; this.a -= .0005;
+    if (this.y < -8 || this.a <= 0) { this.y = H + 8; this.x = Math.random() * W; this.a = Math.random() * .4 + .1; }
   }
   draw() {
     ctx.beginPath();
@@ -614,7 +1187,7 @@ class Pt {
   }
 }
 
-for (let i = 0; i < 90; i++) pts.push(new Pt(true));
+for (let i = 0; i < 70; i++) pts.push(new Pt(true));
 
 (function loop() {
   ctx.clearRect(0, 0, W, H);
@@ -635,12 +1208,162 @@ function closeMob() { mob.classList.remove('open'); }
 // ── SCROLL REVEAL ──
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
-}, { threshold: 0.09 });
-document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+}, { threshold: 0.05 });
+document.querySelectorAll('.rev, .rev-left, .rev-up, .rev-each').forEach(el => obs.observe(el));
 
 // Trigger hero items immediately
 document.querySelectorAll('#hero .rev').forEach(el => {
   setTimeout(() => el.classList.add('on'), 200);
+});
+
+// ── TIMELINE ACTIVE HIGHLIGHTER ──
+const tlItems = document.querySelectorAll('.timeline .tl-item');
+window.addEventListener('scroll', () => {
+  const triggerY = window.innerHeight * 0.45;
+  let activeIndex = -1;
+  
+  tlItems.forEach((item, index) => {
+    const rect = item.getBoundingClientRect();
+    if (rect.top <= triggerY && rect.bottom >= triggerY - 100) {
+      activeIndex = index;
+    }
+  });
+  
+  tlItems.forEach((item, index) => {
+    item.classList.toggle('active-tl-item', index === activeIndex);
+  });
+});
+
+// ── EXPERTISE BOOK DATA & LOGIC ──
+const expertiseData = [
+  {
+    num: "01",
+    title: "Agricultural Programme Management",
+    desc: "Expertise in managing FPOs (Farmer Producer Organisations), smallholder farmer projects, and rural livelihood programmes. Skilled in implementing sustainable agricultural systems, women-led social enterprises, protected cultivation, and high-tech soil-less/hydroponic farming setups.",
+    img: "exp-ag-mgmt.png"
+  },
+  {
+    num: "02",
+    title: "MEAL Frameworks",
+    desc: "A core professional niche specializing in designing and implementing Monitoring, Evaluation, Accountability, and Learning (MEAL) frameworks. Proficient in defining key performance indicators (KPIs), setting up field data collection structures, analyzing quantitative/qualitative reach data, and writing comprehensive donor reports for international agencies.",
+    img: "exp-meal.png"
+  },
+  {
+    num: "03",
+    title: "Data Analysis & Impact Reporting",
+    desc: "Transforming raw field evidence into powerful impact narratives. Skilled in Excel, Power Query, and interactive data visualization. Experienced in translating complex research findings into clear, action-oriented policy and donor communications to drive decision-making in agricultural development.",
+    img: "exp-data.png"
+  },
+  {
+    num: "04",
+    title: "Capacity Building & Training",
+    desc: "Empowering rural communities through structured capacity-building. Experienced in designing training curricula, drafting localized training manuals, and facilitating interactive workshops for smallholders and field staff. Over 2,000 farmers trained across India on sustainable practices.",
+    img: "exp-training.png"
+  },
+  {
+    num: "05",
+    title: "Sustainable & Climate-Smart Agriculture",
+    desc: "Advocating for resilient food systems. Focused on climate-smart horticulture, soil health preservation, and low-input ecological farming methods. Supported by an advanced academic foundation in Sustainable International Agriculture from the University of Göttingen.",
+    img: "exp-sustainable.png"
+  },
+  {
+    num: "06",
+    title: "Stakeholder & Partnership Management",
+    desc: "Building collaborative ecosystems across rural sectors. Experienced in coordinating with government departments, bridging corporate initiatives with local NGOs, and nurturing multi-stakeholder coalitions. Critical for designing and scaling public-private-community development partnerships.",
+    img: "exp-stakeholder.png"
+  }
+];
+
+let activeExpertiseIndex = 0;
+const expSection = document.getElementById('expertise');
+const expContainer = document.getElementById('expertise-container');
+const bookContainer = document.getElementById('book-container');
+const bookNum = document.getElementById('book-num');
+const bookTitle = document.getElementById('book-title');
+const bookDesc = document.getElementById('book-desc');
+const bookImg = document.getElementById('book-img');
+const bookIndicator = document.getElementById('book-indicator');
+
+function updateBookPage(index) {
+  activeExpertiseIndex = index;
+  const data = expertiseData[index];
+  
+  // Transition content
+  const textContent = bookContainer.querySelector('.book-text');
+  if (textContent) {
+    textContent.style.opacity = '0';
+    textContent.style.transform = 'translateY(10px)';
+  }
+  bookImg.style.opacity = '0';
+  bookImg.style.transform = 'scale(1.05)';
+  
+  setTimeout(() => {
+    bookNum.textContent = data.num;
+    bookTitle.textContent = data.title;
+    bookDesc.textContent = data.desc;
+    bookImg.src = data.img;
+    bookImg.alt = data.title;
+    bookIndicator.textContent = `${index + 1} of 6`;
+    
+    if (textContent) {
+      textContent.style.opacity = '1';
+      textContent.style.transform = 'translateY(0)';
+    }
+    bookImg.style.opacity = '1';
+    bookImg.style.transform = 'scale(1)';
+  }, 220);
+  
+  document.querySelectorAll('.exp-card').forEach((card, idx) => {
+    card.classList.toggle('active', idx === index);
+  });
+}
+
+function openBook(index) {
+  expSection.classList.add('active-book-mode');
+  updateBookPage(index);
+  setTimeout(() => {
+    expSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+function closeBook() {
+  expSection.classList.remove('active-book-mode');
+  document.querySelectorAll('.exp-card').forEach(card => card.classList.remove('active'));
+}
+
+document.querySelectorAll('.exp-card').forEach((card, idx) => {
+  card.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openBook(idx);
+  });
+});
+
+document.getElementById('book-prev').addEventListener('click', (e) => {
+  e.stopPropagation();
+  let prevIdx = activeExpertiseIndex - 1;
+  if (prevIdx < 0) prevIdx = expertiseData.length - 1;
+  updateBookPage(prevIdx);
+});
+
+document.getElementById('book-next').addEventListener('click', (e) => {
+  e.stopPropagation();
+  let nextIdx = activeExpertiseIndex + 1;
+  if (nextIdx >= expertiseData.length) nextIdx = 0;
+  updateBookPage(nextIdx);
+});
+
+document.getElementById('book-close').addEventListener('click', (e) => {
+  e.stopPropagation();
+  closeBook();
+});
+
+document.addEventListener('click', (e) => {
+  if (expSection.classList.contains('active-book-mode')) {
+    const isClickInside = expSection.contains(e.target);
+    if (!isClickInside) {
+      closeBook();
+    }
+  }
 });
 </script>
 </body>
